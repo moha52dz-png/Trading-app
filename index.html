@@ -3,118 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP TRADING HUB</title>
+    <title>GOLDEN-EYE INSTITUTIONAL HUB</title>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
-        :root { --bg: #0b0e11; --card: #1e2329; --primary: #f0b90b; --green: #0ecb81; --red: #f6465d; --text: #eaecef; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding-bottom: 70px; }
+        :root { --gold: #d4af37; --bg: #05070a; --card: #11141a; --green: #00ff88; --red: #ff3b30; --blue: #3d94ff; --white: #ffffff; }
+        body { margin: 0; background: var(--bg); color: #e1e1e1; font-family: 'Inter', sans-serif; padding-bottom: 80px; }
         
-        .header { background: #181a20; padding: 15px; border-bottom: 1px solid #333; text-align: center; font-weight: bold; color: var(--primary); font-size: 20px; }
+        /* Header & Nav */
+        .top-nav { background: #000; padding: 15px; border-bottom: 1px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
+        .tab-bar { display: flex; background: var(--card); overflow-x: auto; border-bottom: 1px solid #2a2e39; position: sticky; top:0; z-index:100; }
+        .tab-btn { padding: 15px; font-size: 10px; font-weight: bold; cursor: pointer; color: #848e9c; white-space: nowrap; flex: 1; text-align: center; text-transform: uppercase; }
+        .tab-btn.active { color: var(--gold); border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.05); }
+
+        .page { display: none; padding: 15px; animation: fadeIn 0.3s; }
+        .page.active { display: block; }
+
+        /* Éléments de Trading */
+        .expert-card { background: var(--card); border: 1px solid #2a2e39; margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+        .confidence-box { margin: 10px 0; background: #1e222d; border-radius: 5px; height: 12px; width: 100%; border: 1px solid #333; }
+        .confidence-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--red), var(--green)); width: 92%; }
         
-        /* Système d'onglets */
-        .tabs { display: flex; background: #181a20; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
-        .tab { flex: 1; padding: 12px; text-align: center; font-size: 13px; cursor: pointer; color: #848e9c; border-bottom: 2px solid transparent; }
-        .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+        /* Bouton Canal Premium */
+        .join-box { text-align: center; padding: 40px 20px; background: linear-gradient(180deg, var(--card) 0%, #000 100%); border-radius: 15px; border: 1px solid var(--gold); }
+        .btn-premium { display: block; background: var(--gold); color: #000; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 900; font-size: 16px; margin-top: 20px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
-        .content { display: none; padding: 15px; }
-        .content.active { display: block; }
+        .news-item { border-bottom: 1px solid #2a2e39; padding: 12px 0; font-size: 13px; display: flex; gap: 10px; }
+        .news-tag { color: var(--gold); font-weight: bold; min-width: 50px; }
 
-        /* Graphique */
-        #chart_container { height: 50vh; width: 100%; border-radius: 8px; overflow: hidden; }
-
-        /* Signaux */
-        .signal-card { background: var(--card); border-radius: 12px; padding: 15px; border: 1px solid #333; margin-bottom: 15px; }
-        .status-live { color: var(--green); font-size: 11px; font-weight: bold; float: right; }
-
-        /* FAQ & Aide */
-        .faq-item { background: #181a20; border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid #2b2f36; }
-        .faq-q { color: var(--primary); font-weight: bold; display: block; margin-bottom: 5px; }
-        
-        .btn-action { display: block; width: 100%; background: var(--primary); color: #000; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-
-        /* Footer Fixe */
-        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: #181a20; display: flex; padding: 10px 0; border-top: 1px solid #333; }
-        .nav-btn { flex: 1; text-align: center; font-size: 10px; color: #848e9c; }
-        .nav-btn.active { color: var(--primary); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<div class="header">VIP TRADING HUB</div>
-
-<div class="tabs">
-    <div class="tab active" onclick="openTab(event, 'trade')">TRADE</div>
-    <div class="tab" onclick="openTab(event, 'signaux')">SIGNAUX</div>
-    <div class="tab" onclick="openTab(event, 'faq')">FAQ / AIDE</div>
+<div class="top-nav">
+    <div style="font-weight:900; color:var(--gold); letter-spacing:2px;">GOLDEN-EYE CAPITAL</div>
+    <div style="font-size: 9px; border: 1px solid var(--green); padding: 2px 5px; color: var(--green); border-radius:3px;">LIVE TERMINAL</div>
 </div>
 
-<div id="trade" class="content active">
-    <div id="chart_container"></div>
-    <div style="margin-top:20px;">
-        <h3>Marchés Favoris</h3>
-        <div class="faq-item"><strong>BTC/USDT</strong> <span style="float:right; color:var(--green)">+2.45%</span></div>
-        <div class="faq-item"><strong>ETH/USDT</strong> <span style="float:right; color:var(--red)">-1.12%</span></div>
-    </div>
+<div class="tab-bar">
+    <div class="tab-btn active" onclick="showPage(event, 'terminal')">Graphique</div>
+    <div class="tab-btn" onclick="showPage(event, 'signals')">Signaux</div>
+    <div class="tab-btn" onclick="showPage(event, 'news')">Bourse</div>
+    <div class="tab-btn" onclick="showPage(event, 'academy')">Aide</div>
+    <div class="tab-btn" onclick="showPage(event, 'join')" style="color:var(--gold)">Rejoindre</div>
 </div>
 
-<div id="signaux" class="content">
-    <h3>Flux de Signaux Direct</h3>
-    <div class="signal-card">
-        <span class="status-live">● EN COURS</span>
-        <strong>SIGNAL #2984 - BTC</strong>
-        <p style="color:#848e9c; font-size:13px;">Action : ACHAT (LONG)<br>Levier recommandé : x20</p>
-        <div style="background:#0b0e11; padding:10px; border-radius:5px; font-size:14px;">
-            TP: 72,500$ | SL: 65,000$
+<div id="terminal" class="page active">
+    <div id="tv_chart" style="height: 55vh; width: 100%;"></div>
+</div>
+
+<div id="signals" class="page">
+    <div class="expert-card">
+        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; font-size: 12px; border-bottom: 1px solid #2a2e39;">
+            <strong>ALERTE #5501 - INSTITUTIONNELLE</strong>
+        </div>
+        <div style="padding:15px;">
+            <div style="font-size: 11px; margin-bottom: 5px; color:var(--gold)">INDICE DE CONFIANCE : 92%</div>
+            <div class="confidence-box"><div class="confidence-bar"></div></div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
+                <div><span style="font-size:10px; color:#848e9c;">ORDRE</span><br><strong style="color:var(--green)">ACHAT (LONG)</strong></div>
+                <div><span style="font-size:10px; color:#848e9c;">LEVIER</span><br><strong>x25 (Cross)</strong></div>
+            </div>
         </div>
     </div>
-    <p style="font-size:11px; text-align:center; color:#555;">Les signaux sont mis à jour toutes les 5 minutes via ton bot de trading.</p>
 </div>
 
-<div id="faq" class="content">
-    <h3>Guide pour Débutants</h3>
-    <div class="faq-item">
-        <span class="faq-q">Comment copier un signal ?</span>
-        Ouvrez votre plateforme, entrez le prix d'entrée, le TP (Take Profit) et le SL (Stop Loss) indiqués dans l'onglet SIGNAUX.
-    </div>
-    <div class="faq-item">
-        <span class="faq-q">Quel levier utiliser ?</span>
-        Pour les débutants, nous conseillons un levier entre x2 et x5 maximum.
-    </div>
-    <div class="faq-item">
-        <span class="faq-q">Besoin d'aide ?</span>
-        Contactez notre support VIP directement sur Telegram.
-    </div>
-    <a href="https://t.me/ton_support" class="btn-action">CONTACTER LE SUPPORT</a>
+<div id="news" class="page">
+    <h3 style="color:var(--gold)">Écho des Marchés</h3>
+    <div class="news-item"><span class="news-tag">WALLST</span> Volatilité extrême sur le S&P 500 avant l'ouverture.</div>
+    <div class="news-item"><span class="news-tag">CRYPTO</span> Bitcoin rejette la zone des 69k, support à 67,200$.</div>
+    <div class="news-item"><span class="news-tag">MACRO</span> L'inflation US stable, les investisseurs reprennent confiance.</div>
 </div>
 
-<div class="nav-bottom">
-    <div class="nav-btn active">📊<br>Marché</div>
-    <div class="nav-btn">📡<br>Signaux</div>
-    <div class="nav-btn">❓<br>Aide</div>
+<div id="academy" class="page">
+    <div class="expert-card" style="padding:15px;">
+        <h4 style="color:var(--blue); margin-top:0;">Comment débuter ?</h4>
+        <p style="font-size:13px; color:#8a8d97;">Suivez les signaux de l'onglet "Signaux" et respectez toujours votre Stop Loss pour protéger votre capital.</p>
+    </div>
+</div>
+
+<div id="join" class="page">
+    <div class="join-box">
+        <div style="font-size: 50px; margin-bottom: 20px;">📢</div>
+        <h2 style="color: var(--gold); margin: 0;">CANAL VIP EXCLUSIF</h2>
+        <p style="color: #848e9c; font-size: 14px; margin-top: 10px;">Accédez à 100% de nos analyses, signaux en temps réel et coaching privé.</p>
+        <ul style="text-align: left; font-size: 13px; color: #fff; display: inline-block; margin-top: 20px;">
+            <li>✅ Signaux Haute Précision</li>
+            <li>✅ Alertes News Instantanées</li>
+            <li>✅ Support Prioritaire 24/7</li>
+        </ul>
+        <a href="https://t.me/ton_lien_de_canal" class="btn-premium">REJOINDRE MAINTENANT</a>
+    </div>
 </div>
 
 <script>
-    function openTab(evt, tabName) {
-        var i, content, tabs;
-        content = document.getElementsByClassName("content");
-        for (i = 0; i < content.length; i++) { content[i].className = content[i].className.replace(" active", ""); }
-        tabs = document.getElementsByClassName("tab");
-        for (i = 0; i < tabs.length; i++) { tabs[i].className = tabs[i].className.replace(" active", ""); }
-        document.getElementById(tabName).className += " active";
-        evt.currentTarget.className += " active";
+    function showPage(evt, pageName) {
+        var i, page, tab;
+        page = document.getElementsByClassName("page");
+        for (i = 0; i < page.length; i++) { page[i].className = "page"; }
+        tab = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tab.length; i++) { tab[i].className = "tab-btn"; }
+        document.getElementById(pageName).className = "page active";
+        evt.currentTarget.className = "tab-btn active";
     }
 
     new TradingView.widget({
-      "autosize": true,
-      "symbol": "BINANCE:BTCUSDT",
-      "interval": "15",
-      "timezone": "Etc/UTC",
-      "theme": "dark",
-      "style": "1",
-      "locale": "fr",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "container_id": "chart_container"
+      "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "30", "theme": "dark", "style": "1", "locale": "fr", "container_id": "tv_chart"
     });
 </script>
 
