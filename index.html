@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { background-color: #000; color: white; font-family: sans-serif; text-align: center; margin: 0; }
+        .header { background: linear-gradient(#d32f2f, #800000); padding: 30px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
+        .btn-start { background: #d32f2f; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; width: 80%; margin-top: 20px; box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4); }
+        .card { background: #1a1a1a; margin: 20px; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>CAPSULE OS ULTIMATE</h2>
+        <p>Intelligence Artificielle</p>
+    </div>
+    <div class="card">
+        <p>Statut du Signal : <span style="color: #00ff00;">PRÊT</span></p>
+        <p>Solde Simulation : 13 371.19 €</p>
+    </div>
+    <button class="btn-start" onclick="tg.close()">⚡ DÉMARRER LE SCAN</button>
+    <script>let tg = window.Telegram.WebApp; tg.expand();</script>
+</body>
+</html>
+
