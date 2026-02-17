@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Trading Dashboard</title>
     <style>
-        body { background-color: #000; color: white; font-family: sans-serif; text-align: center; margin: 0; }
-        .header { background: linear-gradient(#d32f2f, #800000); padding: 30px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
-        .btn-start { background: #d32f2f; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; width: 80%; margin-top: 20px; box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4); }
-        .card { background: #1a1a1a; margin: 20px; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        body { margin: 0; background: #000; color: white; font-family: sans-serif; }
+        .header { padding: 10px; text-align: center; background: #131722; border-bottom: 1px solid #333; }
+        .container { height: 70vh; width: 100%; }
+        .signals { padding: 15px; background: #131722; border-top: 1px solid #333; }
+        .signal-card { background: #1e222d; padding: 10px; margin-bottom: 10px; border-radius: 5px; border-left: 4px solid #00ff00; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h2>CAPSULE OS ULTIMATE</h2>
-        <p>Intelligence Artificielle</p>
+
+<div class="header">
+    <strong>COURS EN DIRECT (BTC/USD)</strong>
+</div>
+
+<div class="container">
+    <div id="tradingview_chart" style="height: 100%;"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget({
+      "autosize": true,
+      "symbol": "BINANCE:BTCUSDT",
+      "interval": "5",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "fr",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "container_id": "tradingview_chart"
+    });
+    </script>
+</div>
+
+<div class="signals">
+    <h3>Derniers Signaux Reçus</h3>
+    <div class="signal-card">
+        <strong>🟢 ACHAT - BTC/USD</strong><br>
+        Entrée: 64200 | TP: 65000 | SL: 63800
     </div>
-    <div class="card">
-        <p>Statut du Signal : <span style="color: #00ff00;">PRÊT</span></p>
-        <p>Solde Simulation : 13 371.19 €</p>
-    </div>
-    <button class="btn-start" onclick="tg.close()">⚡ DÉMARRER LE SCAN</button>
-    <script>let tg = window.Telegram.WebApp; tg.expand();</script>
+    <p style="font-size: 12px; color: #888;">Note : Les signaux s'affichent ici après configuration de ton bot.</p>
+</div>
+
 </body>
 </html>
-
